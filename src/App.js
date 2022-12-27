@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SharedLayout from "./components/SharedLayout";
+import ExpenseDashboardPage from "./components/ExpenseDashboardPage";
+import AddExpensePage from "./components/AddExpensePage";
+import EditExpensePage from "./components/EditExpensePage";
+import HelpPage from "./components/HelpPage";
+import NotFoundPage from "./components/NotFoundPage";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<ExpenseDashboardPage />} />
+          <Route path="create" element={<AddExpensePage />} />
+          <Route path="edit" element={<EditExpensePage name="red" />} />
+          <Route path="edit/:expenseId" element={<EditExpensePage />} />
+          <Route path="help" element={<HelpPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
